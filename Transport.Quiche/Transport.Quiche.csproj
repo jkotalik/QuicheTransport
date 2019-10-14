@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RepoRoot>..\..\aspnet-aspnetcore\</RepoRoot>
+    <KestrelSharedSourceRoot>$(RepoRoot)\src\Servers\Kestrel\shared</KestrelSharedSourceRoot>
+  </PropertyGroup>
+
+  <ItemGroup>
+     <!--TODO remove reference to M.A.App-->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\quiche\target\debug\quiche.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(RepoRoot)src\Shared\Buffers.MemoryPool\*.cs" LinkBase="MemoryPool" />
+    <Compile Include="$(KestrelSharedSourceRoot)\CorrelationIdGenerator.cs" Link="Internal\CorrelationIdGenerator.cs" />
+    <Compile Include="$(KestrelSharedSourceRoot)\DuplexPipe.cs" Link="Internal\DuplexPipe.cs" />
+    <Compile Include="$(KestrelSharedSourceRoot)\TransportConnection.cs" Link="Internal\TransportConnection.cs" />
+    <Compile Include="$(KestrelSharedSourceRoot)\TransportConnection.Generated.cs" Link="Internal\TransportConnection.Generated.cs" />
+    <Compile Include="$(KestrelSharedSourceRoot)\TransportConnection.FeatureCollection.cs" Link="Internal\TransportConnection.FeatureCollection.cs" />
+  </ItemGroup>
+
+</Project>
